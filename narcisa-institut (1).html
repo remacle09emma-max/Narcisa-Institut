@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Narcisa — Studio d'Esthétique & Pédicure Médicale · Plainevaux</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --cream:#F0EDE8;--cream-d:#E4DDD4;--cream-m:#EAE5DE;
+      --brown:#3D1F0F;--brown-m:#6B3A22;--brown-l:#A0674A;
+      --brown-p:#D4B8A8;--white:#FAFAF7;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--brown);overflow-x:hidden}
+    *{cursor:none}
+    #cur{width:7px;height:7px;background:var(--brown);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999}
+    #cur-r{width:28px;height:28px;border:1px solid var(--brown-m);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;opacity:.35}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:22px 56px;display:flex;align-items:center;justify-content:space-between;transition:background .4s,padding .4s,box-shadow .4s}
+    nav.sc{background:rgba(240,237,232,.96);backdrop-filter:blur(16px);padding:14px 56px;box-shadow:0 1px 0 rgba(61,31,15,.08)}
+    .n-logo{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:var(--brown);text-decoration:none;letter-spacing:-.02em}
+    .n-links{display:flex;gap:36px;list-style:none}
+    .n-links a{font-size:10.5px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--brown-m);text-decoration:none;transition:color .25s}
+    .n-links a:hover{color:var(--brown)}
+    .n-btn{display:inline-block;padding:11px 28px;background:var(--brown);color:var(--cream);font-size:10px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;transition:background .25s}
+    .n-btn:hover{background:var(--brown-m)}
+
+    /* HERO */
+    .hero{min-height:100vh;background:var(--cream);display:flex;align-items:center;padding:0 56px;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(61,31,15,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(61,31,15,.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+    .hero-wm{position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:64vw;opacity:.04;pointer-events:none;user-select:none;font-family:'Playfair Display',serif;font-size:42vw;font-weight:900;color:var(--brown);line-height:.85;letter-spacing:-.04em}
+
+    .hero-c{position:relative;z-index:1;max-width:1300px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+
+    /* Logo typographique recreé */
+    .logo-block{margin-bottom:36px}
+    .lg-narc{font-family:'Playfair Display',serif;font-size:clamp(80px,10.5vw,148px);font-weight:900;line-height:.88;color:var(--brown);letter-spacing:-.03em;display:block}
+    .lg-row2{display:flex;align-items:flex-end;gap:0;margin-top:6px}
+    .lg-side{font-size:9px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--brown);line-height:1.75;padding-bottom:16px;flex-shrink:0;width:108px}
+    .lg-isa{font-family:'Playfair Display',serif;font-size:clamp(80px,10.5vw,148px);font-weight:900;line-height:.88;color:var(--brown);letter-spacing:-.03em;flex:1;text-align:right}
+    .lg-since{font-size:9px;font-weight:300;letter-spacing:.12em;color:var(--brown);padding-bottom:16px;padding-left:16px;flex-shrink:0;text-align:right}
+
+    .hero-tag{font-size:10px;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--brown-l);display:flex;align-items:center;gap:14px;margin-bottom:32px}
+    .hero-tag::before{content:'';display:block;width:32px;height:1px;background:var(--brown-l)}
+    .hero-desc{font-size:14px;font-weight:300;line-height:1.9;color:var(--brown-m);max-width:440px;margin-bottom:40px}
+    .hero-desc strong{color:var(--brown);font-weight:500}
+    .hero-acts{display:flex;gap:20px;align-items:center}
+    .btn-p{display:inline-block;padding:15px 40px;background:var(--brown);color:var(--cream);font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:background .25s,transform .25s}
+    .btn-p:hover{background:var(--brown-m);transform:translateY(-2px)}
+    .btn-o{font-size:10px;font-weight:300;letter-spacing:.15em;text-transform:uppercase;color:var(--brown);text-decoration:none;padding-bottom:2px;border-bottom:1px solid var(--brown-p);transition:border-color .25s,color .25s}
+    .btn-o:hover{border-color:var(--brown)}
+
+    /* Right cards */
+    .hero-r{display:flex;flex-direction:column;gap:16px}
+    .hcard{background:var(--white);border:1px solid var(--cream-d);padding:28px 32px}
+    .hcard-label{font-size:9.5px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--brown-l);margin-bottom:8px}
+    .hcard-val{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--brown);line-height:1.2}
+    .hcard-sub{font-size:12px;font-weight:300;color:var(--brown-m);margin-top:5px;line-height:1.6}
+    .hcards-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .hcards-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+
+    /* TICKER */
+    .ticker{background:var(--brown);padding:13px 0;overflow:hidden;white-space:nowrap}
+    .ticker-i{display:inline-flex;animation:tick 32s linear infinite}
+    .ti{font-size:10px;letter-spacing:.27em;text-transform:uppercase;color:var(--brown-p);padding:0 32px}
+    .ts{color:var(--brown-l)}
+    @keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+    /* SECTION GLOBALS */
+    .s-tag{font-size:10px;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--brown-l);display:flex;align-items:center;gap:14px;margin-bottom:16px}
+    .s-tag::after{content:'';flex:0 0 32px;height:1px;background:var(--brown-l)}
+    .s-title{font-family:'Playfair Display',serif;font-size:clamp(34px,3.8vw,50px);font-weight:800;line-height:1.1;color:var(--brown);margin-bottom:24px}
+    .s-title em{font-style:italic;font-weight:700}
+    .w{max-width:1300px;margin:0 auto}
+
+    /* ABOUT */
+    .about{padding:120px 56px;background:var(--white)}
+    .about-g{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:center}
+    .avis{position:relative}
+    .alogo{background:var(--cream);border:1px solid var(--cream-d);padding:52px 44px;position:relative}
+    .ac-tl{position:absolute;top:-1px;left:-1px;width:40px;height:40px;border-top:2px solid var(--brown);border-left:2px solid var(--brown)}
+    .ac-br{position:absolute;bottom:-1px;right:-1px;width:40px;height:40px;border-bottom:2px solid var(--brown);border-right:2px solid var(--brown)}
+    .abadge{position:absolute;bottom:-22px;right:-22px;background:var(--brown);color:var(--cream);padding:18px 22px}
+    .abadge-n{font-family:'Playfair Display',serif;font-size:38px;font-weight:900;line-height:1}
+    .abadge-s{font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;opacity:.65;margin-top:3px}
+    .atxt{font-size:14px;font-weight:300;line-height:1.95;color:var(--brown-m);margin-bottom:16px}
+    .atxt strong{color:var(--brown);font-weight:500}
+    .aperks{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+    .perk{display:flex;gap:12px;align-items:flex-start;padding:16px;background:var(--cream);border:1px solid var(--cream-d)}
+    .pdot{width:5px;height:5px;border-radius:50%;background:var(--brown-l);flex-shrink:0;margin-top:6px}
+    .ptxt{font-size:12px;font-weight:300;color:var(--brown-m);line-height:1.6}
+    .ptxt strong{display:block;font-size:12.5px;font-weight:500;color:var(--brown);margin-bottom:2px}
+    .asig{font-family:'Playfair Display',serif;font-size:26px;font-style:italic;font-weight:700;color:var(--brown);margin-top:32px}
+    .asig-s{font-size:11px;font-weight:300;letter-spacing:.12em;color:var(--brown-l);margin-top:3px}
+
+    /* SERVICES */
+    .services{padding:120px 56px;background:var(--cream)}
+    .svc-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px}
+    .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+    .svc{background:var(--white);padding:42px 34px;position:relative;overflow:hidden;transition:background .35s}
+    .svc::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--brown);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+    .svc:hover{background:var(--cream)}
+    .svc:hover::after{transform:scaleX(1)}
+    .svc-n{font-family:'Playfair Display',serif;font-size:68px;font-weight:900;color:rgba(61,31,15,.07);line-height:1;margin-bottom:14px;transition:color .35s}
+    .svc:hover .svc-n{color:rgba(61,31,15,.12)}
+    .svc-t{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--brown);margin-bottom:9px}
+    .svc-d{font-size:12.5px;font-weight:300;line-height:1.8;color:var(--brown-m);margin-bottom:18px}
+    .svc-ul{list-style:none;border-top:1px solid var(--cream-d);padding-top:16px}
+    .svc-ul li{font-size:11.5px;font-weight:300;color:var(--brown-m);padding:4px 0;display:flex;align-items:center;gap:9px}
+    .svc-ul li::before{content:'';display:block;width:13px;height:1px;background:var(--brown-p);flex-shrink:0}
+
+    /* STRIP */
+    .strip{background:var(--brown);padding:76px 56px}
+    .strip-g{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+    .si{padding:40px 32px;border-right:1px solid rgba(255,255,255,.06)}
+    .si:last-child{border:none}
+    .si-ico{font-size:22px;margin-bottom:12px}
+    .si-t{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--cream);margin-bottom:7px}
+    .si-d{font-size:12px;font-weight:300;color:var(--brown-p);line-height:1.7}
+
+    /* BOOKING */
+    .booking{padding:120px 56px;background:var(--cream-m)}
+    .book-g{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    .book-r{background:var(--white);border:1px solid var(--cream-d);padding:48px}
+    .btxt{font-size:14px;font-weight:300;line-height:1.9;color:var(--brown-m);margin:22px 0 36px}
+    .bbtns{display:flex;flex-direction:column;align-items:flex-start}
+    .btn-bk{display:inline-block;padding:15px 44px;background:var(--brown);color:var(--cream);font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:background .25s,transform .25s}
+    .btn-bk:hover{background:var(--brown-m);transform:translateY(-2px)}
+    .btn-ig{display:inline-flex;align-items:center;gap:9px;margin-top:13px;padding:13px 26px;border:1px solid var(--brown-p);color:var(--brown-m);font-size:10px;font-weight:300;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:border-color .25s,color .25s}
+    .btn-ig:hover{border-color:var(--brown);color:var(--brown)}
+    .binfo{display:flex;flex-direction:column;gap:26px}
+    .bi{display:flex;gap:16px;align-items:flex-start}
+    .bi-ico{width:38px;height:38px;flex-shrink:0;background:var(--cream);border:1px solid var(--cream-d);display:flex;align-items:center;justify-content:center}
+    .bi-ico svg{width:15px;height:15px;stroke:var(--brown-m);fill:none;stroke-width:1.5}
+    .bi-l{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--brown-l);margin-bottom:3px}
+    .bi-v{font-size:13.5px;font-weight:300;color:var(--brown);line-height:1.65}
+    .bi-v a{color:inherit;text-decoration:none;border-bottom:1px solid var(--brown-p);transition:border-color .2s}
+    .bi-v a:hover{border-color:var(--brown)}
+
+    /* CONTACT */
+    .contact{padding:120px 56px;background:var(--white)}
+    .contact-g{display:grid;grid-template-columns:1fr 1.3fr;gap:80px;align-items:start}
+    .ci-list{display:flex;flex-direction:column;gap:26px;margin-top:32px}
+    .ci{display:flex;gap:16px}
+    .ci-ico{width:42px;height:42px;flex-shrink:0;background:var(--cream);border:1px solid var(--cream-d);display:flex;align-items:center;justify-content:center}
+    .ci-ico svg{width:17px;height:17px;stroke:var(--brown);fill:none;stroke-width:1.5}
+    .ci-l{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--brown-l);margin-bottom:4px}
+    .ci-v{font-size:14px;font-weight:300;color:var(--brown);line-height:1.7}
+    .ci-v a{color:inherit;text-decoration:none;border-bottom:1px solid var(--brown-p)}
+    .ci-v a:hover{border-color:var(--brown)}
+    .hr-t{width:100%}
+    .hr{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dotted var(--cream-d);font-size:13px;font-weight:300;color:var(--brown-m)}
+    .hr span:first-child{color:var(--brown)}
+    .hr .cl{color:var(--brown-p);font-style:italic}
+    .map-w{background:var(--cream);border:1px solid var(--cream-d);overflow:hidden;position:relative}
+    .map-w iframe{width:100%;height:460px;border:none;display:block}
+    .map-tag{position:absolute;top:16px;left:16px;background:var(--brown);color:var(--cream);padding:9px 14px;font-size:9.5px;letter-spacing:.17em;text-transform:uppercase}
+
+    /* FOOTER */
+    footer{background:var(--brown);padding:60px 56px 26px}
+    .ft-g{display:grid;grid-template-columns:1.8fr 1fr 1fr;gap:56px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.06)}
+    .ft-logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--cream);margin-bottom:11px;letter-spacing:-.01em}
+    .ft-sub{font-size:12px;font-weight:300;color:var(--brown-p);line-height:1.7;max-width:280px}
+    .ft-soc{display:flex;gap:9px;margin-top:22px}
+    .fsc{width:32px;height:32px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s}
+    .fsc:hover{background:rgba(255,255,255,.08)}
+    .fsc svg{width:12px;height:12px;stroke:var(--brown-p);fill:none;stroke-width:1.5}
+    .ft-ct{font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(212,184,168,.55);margin-bottom:16px}
+    .ft-ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+    .ft-ul a{font-size:13px;font-weight:300;color:rgba(240,237,232,.45);text-decoration:none;transition:color .2s}
+    .ft-ul a:hover{color:var(--cream)}
+    .ft-bot{padding-top:22px;display:flex;justify-content:space-between;align-items:center}
+    .ft-cp{font-size:10.5px;font-weight:300;color:rgba(240,237,232,.25);letter-spacing:.04em}
+
+    /* REVEAL */
+    .rv{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+    .rv.in{opacity:1;transform:translateY(0)}
+    .rv:nth-child(2){transition-delay:.09s}
+    .rv:nth-child(3){transition-delay:.18s}
+    .rv:nth-child(4){transition-delay:.27s}
+
+    /* RESPONSIVE */
+    @media(max-width:1100px){
+      nav,nav.sc{padding-left:30px;padding-right:30px}
+      .n-links{display:none}
+      .hero,.about,.services,.booking,.contact,.strip,footer{padding-left:30px;padding-right:30px}
+      .hero-c,.about-g,.book-g,.contact-g{grid-template-columns:1fr;gap:48px}
+      .hero-r{display:none}
+      .svc-grid{grid-template-columns:1fr 1fr}
+      .strip-g{grid-template-columns:1fr 1fr}
+      .ft-g{grid-template-columns:1fr;gap:28px}
+    }
+    @media(max-width:640px){
+      .hero,.about,.services,.booking,.contact,.strip,footer{padding-left:20px;padding-right:20px}
+      .lg-narc,.lg-isa{font-size:64px}
+      .svc-grid{grid-template-columns:1fr}
+      .strip-g{grid-template-columns:1fr}
+      .aperks{grid-template-columns:1fr}
+      .hcards-row,.hcards-3{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#top" class="n-logo">Narcisa</a>
+  <ul class="n-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#services">Prestations</a></li>
+    <li><a href="#booking">Réservation</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://salonkee.be/salon/narcisa-institut" target="_blank" class="n-btn">Réserver en ligne</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-wm" aria-hidden="true">N</div>
+
+  <div class="hero-c">
+    <div>
+      <div class="hero-tag">Studio d'Esthétique & Pédicure Médicale — Plainevaux, Liège</div>
+
+      <!-- LOGO RECRÉE fidèle à l'original -->
+      <div class="logo-block">
+        <span class="lg-narc">Narc</span>
+        <div class="lg-row2">
+          <div class="lg-side">
+            Studio<br>
+            d'Esthétique<br>
+            &amp;<br>
+            Pédicure<br>
+            Médicale
+          </div>
+          <span class="lg-isa">isa</span>
+          <span class="lg-since">since<br>2024</span>
+        </div>
+      </div>
+
+      <p class="hero-desc">
+        Bienvenue chez <strong>Lore Meurant</strong> — esthéticienne passionnée, formée chez <strong>Maud Marcy à Liège</strong>. Un espace intimiste à Plainevaux où chaque soin est pensé pour toi, et uniquement pour toi.
+      </p>
+      <div class="hero-acts">
+        <a href="https://salonkee.be/salon/narcisa-institut" target="_blank" class="btn-p">Prendre rendez-vous</a>
+        <a href="#services" class="btn-o">Voir les soins</a>
+      </div>
+    </div>
+
+    <div class="hero-r">
+      <div class="hcards-row">
+        <div class="hcard">
+          <div class="hcard-label">Horaires</div>
+          <div class="hcard-val">Lun – Sam</div>
+          <div class="hcard-sub">10h00 – 18h00<br>Sur rendez-vous</div>
+        </div>
+        <div class="hcard">
+          <div class="hcard-label">Adresse</div>
+          <div class="hcard-val">Plainevaux</div>
+          <div class="hcard-sub">Grand Route 35B<br>4122 Neupré</div>
+        </div>
+      </div>
+      <div class="hcard">
+        <div class="hcard-label">Since 2024 · Formée chez Maud Marcy, Liège</div>
+        <div class="hcard-val">Lore Meurant — Esthéticienne</div>
+        <div class="hcard-sub">Soins visage · Épilations · Manucures · Pédicure médicale · Massages · Drainage lymphatique. Tu es au centre de toute mon attention.</div>
+      </div>
+      <div class="hcards-3">
+        <div class="hcard">
+          <div class="hcard-label">Parking</div>
+          <div class="hcard-val" style="font-size:18px">Gratuit</div>
+          <div class="hcard-sub">Devant l'institut</div>
+        </div>
+        <div class="hcard">
+          <div class="hcard-label">Boisson</div>
+          <div class="hcard-val" style="font-size:18px">Offerte</div>
+          <div class="hcard-sub">Accueil VIP</div>
+        </div>
+        <div class="hcard">
+          <div class="hcard-label">Réservation</div>
+          <div class="hcard-val" style="font-size:18px">En ligne</div>
+          <div class="hcard-sub">24h/24 Salonkee</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-i">
+    <span class="ti">Soins du visage <span class="ts">✦</span></span>
+    <span class="ti">Épilations <span class="ts">✦</span></span>
+    <span class="ti">Manucures &amp; Ongles <span class="ts">✦</span></span>
+    <span class="ti">Pédicure Médicale <span class="ts">✦</span></span>
+    <span class="ti">Drainage Lymphatique <span class="ts">✦</span></span>
+    <span class="ti">Studio d'Esthétique <span class="ts">✦</span></span>
+    <span class="ti">Grand Route 35B · Plainevaux <span class="ts">✦</span></span>
+    <span class="ti">Formée chez Maud Marcy, Liège <span class="ts">✦</span></span>
+    <span class="ti">Soins du visage <span class="ts">✦</span></span>
+    <span class="ti">Épilations <span class="ts">✦</span></span>
+    <span class="ti">Manucures &amp; Ongles <span class="ts">✦</span></span>
+    <span class="ti">Pédicure Médicale <span class="ts">✦</span></span>
+    <span class="ti">Drainage Lymphatique <span class="ts">✦</span></span>
+    <span class="ti">Studio d'Esthétique <span class="ts">✦</span></span>
+    <span class="ti">Grand Route 35B · Plainevaux <span class="ts">✦</span></span>
+    <span class="ti">Formée chez Maud Marcy, Liège <span class="ts">✦</span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="w">
+    <div class="about-g">
+
+      <div class="avis rv">
+        <!-- Logo recréé dans la section about -->
+        <div class="alogo">
+          <div class="ac-tl"></div>
+          <span class="lg-narc" style="font-size:88px">Narc</span>
+          <div class="lg-row2" style="margin-top:4px">
+            <div class="lg-side" style="font-size:8.5px;width:96px;padding-bottom:14px">
+              Studio<br>d'Esthétique<br>&amp;<br>Pédicure<br>Médicale
+            </div>
+            <span class="lg-isa" style="font-size:88px">isa</span>
+            <span class="lg-since" style="font-size:8.5px;padding-bottom:14px">since<br>2024</span>
+          </div>
+          <div class="ac-br"></div>
+        </div>
+        <div class="abadge">
+          <div class="abadge-n">L</div>
+          <div class="abadge-s">Lore Meurant</div>
+        </div>
+      </div>
+
+      <div class="rv">
+        <div class="s-tag">À propos de moi</div>
+        <h2 class="s-title">Je suis <em>Lore</em>,<br>ton esthéticienne</h2>
+        <p class="atxt">Formée chez <strong>Maud Marcy à Liège</strong> — référence en esthétique professionnelle — j'ai fondé Narcisa en 2024 avec une vision simple : créer un espace intimiste où chaque cliente se sent <strong>unique et pleinement choyée</strong>.</p>
+        <p class="atxt">Pas de course entre les rendez-vous. On prend le temps, on échange, on adapte chaque soin à <strong>ta peau, ton corps, tes besoins</strong>. Tu n'es pas un rendez-vous de plus ici — tu es au centre de toute mon attention.</p>
+        <p class="atxt">Parce que prendre soin de soi, c'est aussi s'accorder <strong>un moment rien qu'à soi</strong>. ✦</p>
+        <div class="aperks">
+          <div class="perk"><div class="pdot"></div><div class="ptxt"><strong>Soins sur-mesure</strong>Adaptés à ta peau &amp; tes envies</div></div>
+          <div class="perk"><div class="pdot"></div><div class="ptxt"><strong>Parking gratuit</strong>Devant l'institut, accès facile</div></div>
+          <div class="perk"><div class="pdot"></div><div class="ptxt"><strong>Boisson offerte</strong>Un accueil chaleureux garanti</div></div>
+          <div class="perk"><div class="pdot"></div><div class="ptxt"><strong>Formation Maud Marcy</strong>Expertise liégeoise reconnue</div></div>
+        </div>
+        <div class="asig">Lore Meurant</div>
+        <div class="asig-s">Esthéticienne · Fondatrice · Narcisa, since 2024</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="w">
+    <div class="svc-head">
+      <div>
+        <div class="s-tag">Mes prestations</div>
+        <h2 class="s-title">Des soins pensés<br><em>pour toi</em></h2>
+      </div>
+      <a href="https://salonkee.be/salon/narcisa-institut" target="_blank" class="btn-o">Voir tous les tarifs →</a>
+    </div>
+    <div class="svc-grid">
+
+      <div class="svc rv">
+        <div class="svc-n">01</div>
+        <h3 class="svc-t">Soins du visage</h3>
+        <p class="svc-d">Des soins ciblés pour révéler l'éclat de ta peau — hydratation, éclat, anti-âge, tout adapté à toi.</p>
+        <ul class="svc-ul">
+          <li>Soin hydratant &amp; éclat</li>
+          <li>Soin anti-âge</li>
+          <li>Nettoyage en profondeur</li>
+          <li>Masques ciblés</li>
+          <li>Modelage visage</li>
+        </ul>
+      </div>
+
+      <div class="svc rv">
+        <div class="svc-n">02</div>
+        <h3 class="svc-t">Épilations</h3>
+        <p class="svc-d">Techniques douces et précises pour une peau parfaitement lisse, du visage au corps entier.</p>
+        <ul class="svc-ul">
+          <li>Sourcils · Lèvres · Menton</li>
+          <li>Aisselles</li>
+          <li>Jambes entières / demi-jambes</li>
+          <li>Maillot · Brésilien · Intégral</li>
+          <li>Bras</li>
+        </ul>
+      </div>
+
+      <div class="svc rv">
+        <div class="svc-n">03</div>
+        <h3 class="svc-t">Manucures &amp; Ongles</h3>
+        <p class="svc-d">Mains et pieds soignés avec précision — du vernis classique à la pose de gel professionnelle.</p>
+        <ul class="svc-ul">
+          <li>Manucure classique</li>
+          <li>Vernis semi-permanent</li>
+          <li>Pose gel / résine</li>
+          <li>Soin des cuticules</li>
+        </ul>
+      </div>
+
+      <div class="svc rv">
+        <div class="svc-n">04</div>
+        <h3 class="svc-t">Pédicure Médicale</h3>
+        <p class="svc-d">Spécialité de Narcisa — soins podologiques sérieux alliant confort, santé et beauté des pieds.</p>
+        <ul class="svc-ul">
+          <li>Pédicure médicale complète</li>
+          <li>Ongles incarnés</li>
+          <li>Mycoses</li>
+          <li>Kératose &amp; hyperkératose</li>
+          <li>Durillons &amp; callosités</li>
+        </ul>
+      </div>
+
+      <div class="svc rv">
+        <div class="svc-n">05</div>
+        <h3 class="svc-t">Massages &amp; Bien-être</h3>
+        <p class="svc-d">Une parenthèse de détente absolue. Corps et esprit ressourcés, loin du quotidien.</p>
+        <ul class="svc-ul">
+          <li>Massage relaxant corps</li>
+          <li>Drainage lymphatique classique</li>
+          <li>Méthode Renata França (Brésil)</li>
+          <li>Remodelage silhouette</li>
+          <li>Anti-cellulite</li>
+        </ul>
+      </div>
+
+      <div class="svc rv">
+        <div class="svc-n">06</div>
+        <h3 class="svc-t">Regard &amp; Sourcils</h3>
+        <p class="svc-d">Sublimer ton regard pour qu'il exprime toute ta personnalité, avec précision et douceur.</p>
+        <ul class="svc-ul">
+          <li>Mise en forme des sourcils</li>
+          <li>Coloration des sourcils</li>
+          <li>Rehaussement de cils</li>
+          <li>Teinture des cils</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="w">
+    <div class="strip-g">
+      <div class="si rv"><div class="si-ico">✦</div><div class="si-t">Soin 100% personnalisé</div><p class="si-d">Chaque prestation est adaptée à ta peau, ton corps et tes attentes</p></div>
+      <div class="si rv"><div class="si-ico">◈</div><div class="si-t">Lun – Sam · 10h–18h</div><p class="si-d">Réservation en ligne 24h/24 via Salonkee — simple et rapide</p></div>
+      <div class="si rv"><div class="si-ico">❋</div><div class="si-t">Parking &amp; boisson offerts</div><p class="si-d">Accès facile, parking gratuit devant l'institut et boisson offerte</p></div>
+      <div class="si rv"><div class="si-ico">◇</div><div class="si-t">Formation Maud Marcy</div><p class="si-d">Lore est formée auprès de la référence esthétique liégeoise</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="w">
+    <div class="book-g">
+      <div class="rv">
+        <div class="s-tag">Prendre rendez-vous</div>
+        <h2 class="s-title">Réserve ta<br><em>parenthèse</em></h2>
+        <p class="btxt">Réservation en ligne disponible 24h/24 via Salonkee. Choisis ton soin, ton créneau, et laisse-toi chouchouter par Lore dans son studio de Plainevaux.</p>
+        <div class="bbtns">
+          <a href="https://salonkee.be/salon/narcisa-institut" target="_blank" class="btn-bk">Réserver sur Salonkee</a>
+          <a href="https://www.instagram.com/narcisa_institut/" target="_blank" class="btn-ig">
+            <svg viewBox="0 0 24 24" width="12" height="12"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            @narcisa_institut
+          </a>
+        </div>
+      </div>
+      <div class="book-r rv">
+        <div class="binfo">
+          <div class="bi">
+            <div class="bi-ico"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><div class="bi-l">Adresse</div><div class="bi-v">Grand Route 35B<br>Plainevaux, 4122 Neupré<br>Province de Liège, Belgique</div></div>
+          </div>
+          <div class="bi">
+            <div class="bi-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div><div class="bi-l">Horaires</div><div class="bi-v">Lundi – Samedi · 10h00 – 18h00<br><span style="font-size:12px;color:var(--brown-l)">Dimanche : fermé</span></div></div>
+          </div>
+          <div class="bi">
+            <div class="bi-ico"><svg viewBox="0 0 24 24"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3"/><rect x="9" y="11" width="14" height="10" rx="2"/><line x1="13" y1="16" x2="17" y2="16"/></svg></div>
+            <div><div class="bi-l">Parking</div><div class="bi-v">Gratuit — devant l'institut</div></div>
+          </div>
+          <div class="bi">
+            <div class="bi-ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.82 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.1 4.16 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div><div class="bi-l">Réservation en ligne</div><div class="bi-v"><a href="https://salonkee.be/salon/narcisa-institut" target="_blank">Salonkee — 24h/24</a></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / MAP -->
+<section class="contact" id="contact">
+  <div class="w">
+    <div class="contact-g">
+      <div>
+        <div class="s-tag">Me trouver</div>
+        <h2 class="s-title">Viens me<br><em>rendre visite</em></h2>
+        <div class="ci-list">
+          <div class="ci">
+            <div class="ci-ico"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div>
+              <div class="ci-l">Adresse</div>
+              <div class="ci-v">Grand Route 35B<br>Plainevaux, 4122 Neupré<br>Province de Liège — Belgique<br><span style="font-size:12px;color:var(--brown-l)">Parking gratuit devant l'institut</span></div>
+            </div>
+          </div>
+          <div class="ci">
+            <div class="ci-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div>
+              <div class="ci-l">Horaires</div>
+              <div class="ci-v">
+                <div class="hr-t">
+                  <div class="hr"><span>Lundi</span><span>10h – 18h</span></div>
+                  <div class="hr"><span>Mardi</span><span>10h – 18h</span></div>
+                  <div class="hr"><span>Mercredi</span><span>10h – 18h</span></div>
+                  <div class="hr"><span>Jeudi</span><span>10h – 18h</span></div>
+                  <div class="hr"><span>Vendredi</span><span>10h – 18h</span></div>
+                  <div class="hr"><span>Samedi</span><span>10h – 18h</span></div>
+                  <div class="hr"><span>Dimanche</span><span class="cl">Fermé</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ci">
+            <div class="ci-ico"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+            <div><div class="ci-l">Instagram</div><div class="ci-v"><a href="https://www.instagram.com/narcisa_institut/" target="_blank">@narcisa_institut</a></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="map-w rv">
+        <div class="map-tag">Grand Route 35B · Plainevaux</div>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2520.8!2d5.5783!3d50.5172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c0627d0bffffff%3A0x1!2sGrand+Route+35B%2C+4122+Plainevaux%2C+Belgique!5e0!3m2!1sfr!2sBE!4v1&q=Grand+Route+35B,+Plainevaux+4122,+Belgium"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Narcisa — Grand Route 35B, Plainevaux, 4122 Neupré">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="w">
+    <div class="ft-g">
+      <div>
+        <div class="ft-logo">Narcisa</div>
+        <p class="ft-sub">Studio d'Esthétique &amp; Pédicure Médicale à Plainevaux (Neupré). Fondé en 2024 par Lore Meurant, formée chez Maud Marcy à Liège.</p>
+        <div class="ft-soc">
+          <a href="https://www.instagram.com/narcisa_institut/" target="_blank" class="fsc">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://salonkee.be/salon/narcisa-institut" target="_blank" class="fsc">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-ct">Navigation</div>
+        <ul class="ft-ul">
+          <li><a href="#about">À propos de Lore</a></li>
+          <li><a href="#services">Prestations</a></li>
+          <li><a href="#booking">Réservation</a></li>
+          <li><a href="#contact">Contact &amp; Accès</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ft-ct">Soins</div>
+        <ul class="ft-ul">
+          <li><a href="#services">Soins du visage</a></li>
+          <li><a href="#services">Épilations</a></li>
+          <li><a href="#services">Manucures</a></li>
+          <li><a href="#services">Pédicure Médicale</a></li>
+          <li><a href="#services">Massages &amp; Drainage</a></li>
+          <li><a href="#services">Regard &amp; Sourcils</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span class="ft-cp">© 2025 Narcisa — Grand Route 35B, Plainevaux 4122, Belgique</span>
+      <span class="ft-cp">Studio d'Esthétique &amp; Pédicure Médicale · since 2024</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const cur=document.getElementById('cur'),cr=document.getElementById('cur-r');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    cur.style.transform=`translate(${mx-3.5}px,${my-3.5}px)`;
+  });
+  (function t(){rx+=(mx-rx-14)*.1;ry+=(my-ry-14)*.1;cr.style.transform=`translate(${rx}px,${ry}px)`;requestAnimationFrame(t)})();
+  window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',scrollY>50));
+  const ob=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
+  document.querySelectorAll('.rv').forEach(el=>ob.observe(el));
+</script>
+</body>
+</html>
